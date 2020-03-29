@@ -1,11 +1,20 @@
-function x = gaussianElimination(A, b)
+function [x, sparsity] = gaussianElimination(A, b)
 
 n = length(b);
 A = [A, b];
 
+figure windowstate maximized
+spy(A)
+sparsity = zeros(n, 1);
+sparsity(1) = nnz(A) ./ numel(A);
+
 for k=1:n - 1
    m = A(k + 1:end, k) ./ A(k, k);
-   A(k + 1:end, :) = A(k + 1:end, :) - m * A(k, :);
+   A(k + 1:end, k:end) = A(k + 1:end, k:end) - m * A(k, k:end);
+
+   spy(A)
+   drawnow
+   sparsity(k + 1) = nnz(A) ./ numel(A);
 end
 
 % Backward substitution
