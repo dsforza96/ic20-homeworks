@@ -9,12 +9,18 @@ sparsity = zeros(n, 1);
 sparsity(1) = nnz(A) ./ numel(A);
 
 for k=1:n - 1
-   m = A(k + 1:end, k) ./ A(k, k);
-   A(k + 1:end, k:end) = A(k + 1:end, k:end) - m * A(k, k:end);
+    % Pivoting
+    if (A(k, k) == 0)
+        r = find(A(k + 1:n, k), 1) + k;
+        A([k, r], k:end) = A([r, k], k:end);
+    end
 
-   spy(A)
-   drawnow
-   sparsity(k + 1) = nnz(A) ./ numel(A);
+    m = A(k + 1:n, k) ./ A(k, k);
+    A(k + 1:n, k:end) = A(k + 1:n, k:end) - m * A(k, k:end);
+
+    spy(A)
+    drawnow
+    sparsity(k + 1) = nnz(A) ./ numel(A);
 end
 
 % Backward substitution

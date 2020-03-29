@@ -3,11 +3,7 @@ close all
 clc
 
 n = 100;
-
-A = sprand(n, n, 0.2);
-A = min(A + diag(ones(n, 1) .* 0.001), 1);
-A = full(A);
-
+A = full(sprand(n, n, 0.2));
 b = rand(n, 1);
 
 %%
