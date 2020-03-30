@@ -3,10 +3,10 @@ close all
 clc
 
 n = 100;
-A = full(sprand(n, n, 0.2));
+A = rand(n);
 b = rand(n, 1);
 
-x = gaussianEliminationWithPivoting(A, b, @naivePivoting);
+x = gaussianEliminationWithPivoting(A, b, @completePivoting);
 
-y = A \ b;
-mean(abs(x - y))
+% y = A \ b;
+% mean(abs(x - y))
