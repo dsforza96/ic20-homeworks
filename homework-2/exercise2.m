@@ -13,6 +13,9 @@ for i=1:length(sizes)
         A = rand(n);
         b = rand(n, 1);
 
+        cond = norm(inv(A)) .* norm(A);
+        fprintf('cond(A) = %g\n', cond)
+
         tic
         gaussianEliminationWithPivoting(A, b, @naivePivoting);
         etimes(1, i) = etimes(1, i) + toc;
