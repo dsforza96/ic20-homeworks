@@ -5,6 +5,7 @@ A = [A, b];
 
 figure windowstate maximized
 spy(A)
+
 sparsity = zeros(n, 1);
 sparsity(1) = nnz(A) ./ numel(A);
 
@@ -20,6 +21,7 @@ for k=1:n - 1
 
     spy(A)
     drawnow
+
     sparsity(k + 1) = nnz(A) ./ numel(A);
 end
 
