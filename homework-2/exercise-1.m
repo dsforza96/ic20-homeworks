@@ -11,7 +11,7 @@ b = rand(n, 1);
 [x, sparsity] = gaussianElimination(A, b);
 
 % y = A \ b;
-% max(abs(x - y))
+% mean(abs(x - y))
 
 %%
 
