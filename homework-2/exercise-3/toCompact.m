@@ -5,7 +5,7 @@ M_ = M - diag(diag(M));
 
 C.V = diag(M);
 A = nonzeros(M_');
-C.V = [C.V; -1; A];
+C.V = [C.V; nan; A];
 
 I = sum(logical(M_), 2);
 I = [0; I];
