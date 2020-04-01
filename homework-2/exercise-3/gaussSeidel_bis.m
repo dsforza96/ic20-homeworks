@@ -7,10 +7,10 @@ x = zeros(n, 1);
 for k=1:100
    for i=1:n
        [row, jcol] = extractRow(A, i);
-       j = jcol < i;
-       jj = ~j;
+       jnew = jcol < i;
+       jold = ~jnew;
         
-       x(i) = (b(i) - row(j) * x(jcol(j))- row(jj) * x0(jcol(jj))) ./ A.V(i);
+       x(i) = (b(i) - row(jnew) * x(jcol(jnew))- row(jold) * x0(jcol(jold))) ./ A.V(i);
    end
    
    x0 = x;
