@@ -5,12 +5,13 @@ clc
 sizes = [50, 100, 150, 200, 250];
 m = 20;  % Number of matrices on which to average results
 
-b = ones(n, 1);
 etimes = zeros(3, length(sizes));
 
 for i=1:length(sizes)
+    n = sizes(i);
+    b = ones(n, 1);
+
     for j=1:m
-        n = sizes(i);
         A = rand(n);
 
         cond = norm(inv(A)) .* norm(A);
