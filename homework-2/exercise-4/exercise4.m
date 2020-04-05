@@ -2,6 +2,7 @@ clear all
 close all
 clc
 
+% Importing functions from the previous exercise
 addpath('../exercise-3')
 
 sizes = [50, 100, 150, 200, 250];
@@ -10,6 +11,7 @@ m = 10;  % Number of matrices on which to average results
 eps = 0.01;
 etimes = zeros(2, length(sizes));
 
+% Creating a parallel pool
 tic
 cluster = parcluster();
 pool = parpool(cluster.NumWorkers);

@@ -1,6 +1,7 @@
 function [x, sparsity] = gaussianElimination(A, b)
 % Solves the linear system A * x = b using the Gaussian elimination method.
-% Returns the solution x and the sparsity of matrix A|b at each iteration.
+% Returns the solution x and the sparsity of matrix A|b at each iteration
+% and shows the sparsity pattern at each iteration.
 
 n = length(b);
 A = [A, b];

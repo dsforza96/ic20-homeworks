@@ -1,7 +1,7 @@
 function [x, k] = jacobi(A, b, eps, ground_truth)
 % Solves the linear system A * x = b using the Jacobi iterative method. If
 % the exact solution ground_truth is given, uses the E1 criterion for
-% checking the convergence. Otherwise the E2 criterion is used. Returns
+% checking the convergence, otherwise the E2 criterion is used. Returns
 % the solution x and the number of iteration performed to converge
 % (E < eps).
 % 
