@@ -36,18 +36,19 @@ iters = iters ./ m;
 
 figure
 subplot(1, 2, 1)
-plot(sizes, iters([1 2], :))  % Converting to milliseconds
+plot(sizes, iters([1 2], :))
 axis square
 
-title 'Averaged execution time'
+title 'Jacobi Method'
 xlabel 'Dimension (# rows)'
-ylabel 'Time (ms)'
-legend('Elapsed Time', 'CPU Time')
+ylabel 'Number of interation'
+legend('E1', 'E2')
 
 subplot(1, 2, 2)
-plot(sizes, iters([3 4], :))  % Converting to kilobytes
+plot(sizes, iters([3 4], :))
 axis square
 
-title 'Averaged memory occupation'
+title 'Gauss-Siedel Method'
 xlabel 'Dimension (# rows)'
-ylabel 'Memory occupation (kB)'
+ylabel 'Number of interation'
+legend('E1', 'E2')
