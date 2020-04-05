@@ -1,8 +1,8 @@
 clear all
 close all
-% clc
+clc
 
-n = 1000;
+n = 100;
 b = ones(n, 1);
 
 S = sprand(n, n, 0.2);
@@ -12,17 +12,17 @@ S = S + diag(sum(S, 2)) + diag(rand(n, 1));
 
 A_comp = toCompact(S);
 
-pool = parpool(4);
+% pool = parpool(4);
 
-ticBytes(pool);
+% ticBytes(pool);
 tic;
 
-parallelJacobi(A_comp, b);
+[~, k] = parallelJacobi(A_comp, b);
 
 toc;
-tocBytes(pool);
+% tocBytes(pool);
 tic
-jacobi(A_comp, b);
+[~, k] = jacobi(A_comp, b);
 toc
 
-delete(pool)
+% delete(pool)

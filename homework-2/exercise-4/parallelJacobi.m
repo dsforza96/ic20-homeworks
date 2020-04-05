@@ -8,16 +8,15 @@ err = inf;
 k = 0;
 
 while err > 0.01
+    x = b;
     parfor i=1:n
         [row, jcol] = extractRow(A, i);
-        x(i) = b(i);
 
         if ~isempty(row)
             x(i) = x(i) - row * x0(jcol);
         end
-
-        x(i) = x(i) ./ A.V(i);
     end
+    x = x ./ A.V(1:n);
 
     if exist('ground_truth', 'var')
         err = norm(ground_truth - x);
