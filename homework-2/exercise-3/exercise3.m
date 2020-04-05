@@ -19,13 +19,13 @@ for i=1:length(sizes)
 
         [~, k] = jacobi(A_comp, b, eps, ground_truth);
         iters(1, i) = iters(1, i) + k;
-        
+
         [~, k] = jacobi(A_comp, b, eps);
         iters(2, i) = iters(2, i) + k;
-        
+
         [~, k] = gaussSeidel(A_comp, b, eps, ground_truth);
         iters(3, i) = iters(3, i) + k;
-        
+
         [~, k] = gaussSeidel(A_comp, b, eps);
         iters(4, i) = iters(4, i) + k;
     end
@@ -40,16 +40,16 @@ subplot(1, 2, 1)
 plot(sizes, iters([1 2], :))
 axis square
 
-title 'Averaged number of iteration for the Jacobi method'
+title 'Averaged number of iterations for Jacobi'
 xlabel 'Dimension (# rows)'
-ylabel 'Number of interation'
+ylabel 'Number of interations'
 legend('E1 = ║x - x^k║', 'E2 = ║x^k - x^{k-1}║')
 
 subplot(1, 2, 2)
 plot(sizes, iters([3 4], :))
 axis square
 
-title 'Averaged number of iteration for the Gauss-Siedel method'
+title 'Averaged number of iterations for Gauss-Siedel'
 xlabel 'Dimension (# rows)'
-ylabel 'Number of interation'
+ylabel 'Number of interations'
 legend('E1 = ║x - x^k║', 'E2 = ║x^k - x^{k-1}║')

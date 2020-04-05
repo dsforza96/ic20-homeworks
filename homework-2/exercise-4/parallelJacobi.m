@@ -20,12 +20,7 @@ while err >= eps
     end
     x = x ./ A.V(1:n);
 
-    if exist('ground_truth', 'var')
-        err = norm(ground_truth - x);
-    else
-        err = norm(x0 - x);
-    end
-
+    err = norm(x0 - x);
     x0 = x;
     k = k + 1;
 end

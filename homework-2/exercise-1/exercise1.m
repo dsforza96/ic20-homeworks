@@ -14,6 +14,6 @@ b = ones(n, 1);
 figure
 plot(0:n - 1, sparsity)
 
-title 'Sparsity of matrix A|b per iteration'
+title 'Sparsity of matrix A|b'
 xlabel 'Iteration'
 ylabel 'Sparsity'

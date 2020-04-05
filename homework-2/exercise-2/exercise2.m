@@ -13,10 +13,10 @@ for i=1:length(sizes)
 
     for j=1:m
         A = rand(n);
-        
+
         % Printing the condition number for the linear system
         cond = norm(inv(A)) .* norm(A);
-        fprintf('cond(A) = %g\n', cond)
+        fprintf("cond(A) = %g\n", cond)
 
         tic
         gaussianEliminationWithPivoting(A, b, @naivePivoting);
@@ -34,7 +34,7 @@ end
 
 etimes = etimes ./ m;
 
-%%
+%% Showing results
 
 figure
 plot(sizes, etimes .* 1000)  % Converting to milliseconds
@@ -42,5 +42,4 @@ plot(sizes, etimes .* 1000)  % Converting to milliseconds
 title 'Averaged execution time'
 xlabel 'Dimension (# rows)'
 ylabel 'Time (ms)'
-legend('Naive', 'Partial', 'Complete')
-
+legend('Naive pivoting', 'Partial pivoting', 'Complete pivoting')
