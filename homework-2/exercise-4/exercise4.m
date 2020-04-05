@@ -7,6 +7,7 @@ addpath('../exercise-3')
 sizes = [50, 100, 150, 200, 250];
 m = 10;  % Number of matrices on which to average results
 
+eps = 0.01;
 etimes = zeros(2, length(sizes));
 
 tic
@@ -23,11 +24,11 @@ for i=1:length(sizes)
         A_comp = toCompact(A);
 
         tic
-        jacobi(A_comp, b);
+        jacobi(A_comp, b, eps);
         etimes(1, i) = etimes(1, i) + toc;
 
         tic
-        parallelJacobi(A_comp, b);
+        parallelJacobi(A_comp, b, eps);
         etimes(2, i) = etimes(2, i) + toc;
     end
 end
