@@ -6,12 +6,12 @@ clc
 addpath('../exercise-3')
 
 sizes = [50, 100, 150, 200, 250];
-m = 10;  % Number of matrices on which to average results
+m = 5;  % Number of matrices on which to average results
 
 eps = 0.01;
 etimes = zeros(2, length(sizes));
 
-% Creating a parallel pool
+% Creating the parallel pool
 tic
 cluster = parcluster();
 pool = parpool(cluster.NumWorkers);
@@ -38,14 +38,15 @@ end
 etimes = etimes ./ m;
 delete(pool);
 
-%%
+%% Showing results
 
 fprintf("Overhead introduced by parallelization: %f sec\n", overhead)
 
 figure
-plot(sizes, etimes .* 1000)  % Converting to milliseconds
+plot(sizes, etimes)
 
+title 'Ageraged execution time'
 xlabel 'Dimension (# rows)'
-ylabel 'Time (ms)'
+ylabel 'Time (sec)'
 legend('Serial', 'Parallel')
 
