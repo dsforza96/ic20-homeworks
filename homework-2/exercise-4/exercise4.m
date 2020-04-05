@@ -2,27 +2,47 @@ clear all
 close all
 clc
 
-n = 100;
-b = ones(n, 1);
+addpath('../exercise-3')
 
-S = sprand(n, n, 0.2);
-S = S - diag(diag(S));
+sizes = [50, 100, 150, 200, 250];
+m = 10;  % Number of matrices on which to average results
 
-S = S + diag(sum(S, 2)) + diag(rand(n, 1));
+etimes = zeros(2, length(sizes));
 
-A_comp = toCompact(S);
-
-% pool = parpool(4);
-
-% ticBytes(pool);
-tic;
-
-[~, k] = parallelJacobi(A_comp, b);
-
-toc;
-% tocBytes(pool);
 tic
-[~, k] = jacobi(A_comp, b);
-toc
+cluster = parcluster();
+pool = parpool(cluster.NumWorkers);
+overhead = toc;
 
-% delete(pool)
+for i=1:length(sizes)
+    n = sizes(i);
+    b = ones(n, 1);
+
+    for j=1:m
+        A = generateDiagonallyDominant(n, 0.2);
+        A_comp = toCompact(A);
+
+        tic
+        jacobi(A_comp, b);
+        etimes(1, i) = etimes(1, i) + toc;
+
+        tic
+        parallelJacobi(A_comp, b);
+        etimes(2, i) = etimes(2, i) + toc;
+    end
+end
+
+etimes = etimes ./ m;
+delete(pool);
+
+%%
+
+fprintf("Overhead introduced by parallelization: %f sec\n", overhead)
+
+figure
+plot(sizes, etimes .* 1000)  % Converting to milliseconds
+
+xlabel 'Dimension (# rows)'
+ylabel 'Time (ms)'
+legend('Serial', 'Parallel')
+
