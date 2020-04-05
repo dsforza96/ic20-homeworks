@@ -1,4 +1,9 @@
 function [A, xperm] = rookPivoting(A, xperm, k)
+% Performs complete pivoting on matrix A and step k. Returns the permuted
+% matrix and the relative permutation of the vector of the unknowns.
+
+% This is only a quick implementation I used during testing, so I decided
+% NOT to incude it in the final version of the exercise.
 
 [M1, R] = max(abs(A(k:end, k:end - 1)));
 [M2, S] = max(abs(A(k:end, k:end - 1)), [], 2);

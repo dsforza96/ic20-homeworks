@@ -1,6 +1,6 @@
 function [row, J] = extractRow(C, h)
 % Extracts row h from matrix C given in the MSR format. Also returs the
-% vector of column indexes J.
+% vector of column indexes J. Does NOT return the element on the diagonal.
 
 ih = C.B(h):C.B(h + 1) - 1;
 

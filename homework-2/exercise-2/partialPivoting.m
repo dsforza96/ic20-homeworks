@@ -1,4 +1,6 @@
 function [A, xperm] = partialPivoting(A, xperm, k)
+% Performs partial pivoting on matrix A and step k. Returns the permuted
+% matrix and the relative permutation of the vector of the unknowns.
 
 [~, r] = max(abs(A(k:end, k)));
 r = r + k - 1;

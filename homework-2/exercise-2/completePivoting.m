@@ -1,4 +1,6 @@
 function [A, xperm] = completePivoting(A, xperm, k)
+% Performs complete pivoting on matrix A and step k. Returns the permuted
+% matrix and the relative permutation of the vector of the unknowns.
 
 [M, R] = max(abs(A(k:end, k:end - 1)));
 [~, s] = max(M);

@@ -1,4 +1,6 @@
 function x = gaussianEliminationWithPivoting(A, b, pivoting)
+% Solves the linear system A * x = b using the Gaussian elimination method
+% with the provided pivoting technique.
 
 n = length(b);
 A = [A, b];

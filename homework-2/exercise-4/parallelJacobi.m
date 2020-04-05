@@ -1,4 +1,12 @@
 function [x, k] = parallelJacobi(A, b, ground_truth)
+% Solves the linear system A * x = b using a parallel implementation of
+% the Jacobi iterative method. If the exact solution ground_truth is given, uses the E1 criterion for
+% checking the convergence. Otherwise the E2 criterion is used. Returns
+% the solution x and the number of iteration performed to converge
+% (E < eps).
+% 
+%   E1 = ║ground_truth - x_k║
+%   E2 = ║x_k - x_(k-1)║
 
 n = length(b);
 
