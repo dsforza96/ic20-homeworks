@@ -2,10 +2,13 @@ clear all
 close all
 clc
 
-A = rand(10);
+eps = 0.01;
 
-[u, lambda] = epair(A, 0.001);
+A = rand(100);
 
-[v, l] = eigs(A, 1, 'largestabs');
+[u1, lambda1] = epair(A, eps);
+
+[u2, lambda2] = deflation(A, u1, lambda1, eps);
+
+[v, l] = eigs(A, 2, 'largestabs');
 v = abs(v ./ max(abs(v)));
-
