@@ -1,6 +1,6 @@
-function [u2, lambda2] = deflation(A, u1, lambda1, eps)
+function [x2, lambda2] = deflation(A, x1, lambda1, eps)
 
-[H, ~] = qr(u1);
+[H, ~] = qr(x1);
 
 HAH = H * A * H;
 B = HAH(2:end, 2:end);
@@ -9,7 +9,7 @@ b = HAH(1, 2:end);
 [y2, lambda2] = epair(B, eps);
 
 gamma = b * y2 ./ (lambda2 - lambda1);
-u2 = H * [gamma; y2];
+x2 = H * [gamma; y2];
 
 
 
