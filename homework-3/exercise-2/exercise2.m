@@ -10,9 +10,10 @@ end
 n = 10;
 eps = 1e-6;
 
-S = full(sprand(n, n, 0.2));
+S = full(sprandsym(n, 0.2));
 S = S - diag(diag(S));
-A = logical(S + S');
+
+A = logical(S);
 
 %%
 
