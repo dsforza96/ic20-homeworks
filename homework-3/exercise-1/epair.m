@@ -1,8 +1,6 @@
 function [x, lambda] = epair(A, eps)
 
-n = size(A, 1);
-
-x = ones(n, 1);
+x = ones(size(A, 1), 1);
 lambda0 = 0;
 err = inf;
 

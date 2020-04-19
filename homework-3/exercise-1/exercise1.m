@@ -2,15 +2,57 @@ clear all
 close all
 clc
 
-eps = 0.001;
+sizes = [25, 50, 75, 100, 125, 150, 175, 200];
+m = 20;  % Number of matrices on which to average results
 
-A = rand(100);
-A = (A + A') ./ 2; % Forcing the matrix to be symmetric
+eps = 1e-4;
+errors = zeros(2, length(sizes));
+minerrs = repelem(inf, 2, length(sizes));
+maxerrs = repelem(-inf, 2, length(sizes));
 
-[u1, lambda1] = epair(A, eps);
+for i=1:length(sizes)
+    n = sizes(i);
 
-[u2, lambda2] = deflation(A, u1, lambda1, eps);
+    for j=1:m
+        A = rand(n);
+        A = (A + A') ./ 2;  % Forcing the matrix to be symmetric
+        ground_truth = abs(eigs(A, 2));
 
-[v, l] = eigs(A, 2);
-v = abs(v ./ max(abs(v)));
-u2 = abs(u2 ./ max(abs(u2)));
+        [x1, lambda1] = epair(A, eps);
+
+        err = abs(ground_truth(1) - lambda1);
+        errors(1, i) = errors(1, i) + err;
+        minerrs(1, i) = min(minerrs(1, i), err);
+        maxerrs(1, i) = max(maxerrs(1, i), err);
+
+        [~, lambda2] = deflation(A, x1, lambda1, eps);
+
+        err = abs(ground_truth(2) - lambda2);
+        errors(2, i) = errors(2, i) + err;
+        minerrs(2, i) = min(minerrs(2, i), err);
+        maxerrs(2, i) = max(maxerrs(2, i), err);
+    end
+end
+
+errors = errors ./ m;
+minerrs = errors - minerrs;
+maxerrs = maxerrs - errors;
+
+%% Showing results
+
+figure
+subplot(1, 2, 1)
+errorbar(sizes, errors(1, :), errors(1, :), maxerrs(1, :));
+axis square
+
+title 'First eigenvalue'
+xlabel 'Dimension (# rows)'
+ylabel 'Error'
+
+subplot(1, 2, 2)
+errorbar(sizes, errors(2, :), errors(2, :), maxerrs(2, :));
+axis square
+
+title 'Second eigenvalue'
+xlabel 'Dimension (# rows)'
+ylabel 'Error'
