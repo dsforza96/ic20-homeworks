@@ -41,15 +41,15 @@ G = graph(A);
 blue = zeros(n, 3);
 blue(:, 3) = 1;
 
-red_ind = [(1:n)' == maxgould, posneg_split, mean_split, median_split];
+partitions = [(1:n)' == maxgould, posneg_split, mean_split, median_split];
 titles = {'Gould', 'Pos-neg', 'Mean', 'Median'};
 
 for i=1:4
     subplot(2, 2, i);
 
     cmap = blue;
-    cmap(red_ind(:, i), 1) = 1;
-    cmap(red_ind(:, i), 3) = 0;
+    cmap(partitions(:, i), 1) = 1;
+    cmap(partitions(:, i), 3) = 0;
 
     plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
     title(titles(i))
