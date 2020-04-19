@@ -2,9 +2,9 @@ function [x2, lambda2] = deflation(A, x1, lambda1, eps)
 
 [H, ~] = qr(x1);
 
-HAH = H * A * H;
-B = HAH(2:end, 2:end);
-b = HAH(1, 2:end);
+A_similar = H * A * H;
+B = A_similar(2:end, 2:end);
+b = A_similar(1, 2:end);
 
 [y2, lambda2] = epair(B, eps);
 
