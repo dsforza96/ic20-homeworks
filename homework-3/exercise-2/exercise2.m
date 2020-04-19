@@ -8,9 +8,9 @@ if ~exist('exercise-1', 'dir')
 end
 
 n = 10;
-eps = 1e-4;
+eps = 1e-6;
 
-S = sprand(n, n, 0.2);
+S = full(sprand(n, n, 0.2));
 S = S - diag(diag(S));
 A = logical(S + S');
 

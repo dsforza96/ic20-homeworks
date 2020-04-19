@@ -5,7 +5,7 @@ clc
 sizes = [25, 50, 75, 100, 125, 150, 175, 200];
 m = 20;  % Number of matrices on which to average results
 
-eps = 1e-4;
+eps = 1e-6;
 errors = zeros(2, length(sizes));
 minerrs = repelem(inf, 2, length(sizes));
 maxerrs = repelem(-inf, 2, length(sizes));
@@ -42,7 +42,7 @@ maxerrs = maxerrs - errors;
 
 figure
 subplot(1, 2, 1)
-errorbar(sizes, errors(1, :), errors(1, :), maxerrs(1, :));
+errorbar(sizes, errors(1, :), minerrs(1, :), maxerrs(1, :));
 axis square
 
 title 'First eigenvalue'
@@ -50,7 +50,7 @@ xlabel 'Dimension (# rows)'
 ylabel 'Error'
 
 subplot(1, 2, 2)
-errorbar(sizes, errors(2, :), errors(2, :), maxerrs(2, :));
+errorbar(sizes, errors(2, :), minerrs(2, :), maxerrs(2, :));
 axis square
 
 title 'Second eigenvalue'
