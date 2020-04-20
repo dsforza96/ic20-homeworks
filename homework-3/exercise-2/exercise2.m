@@ -10,11 +10,12 @@ end
 n = 10;
 eps = 1e-6;
 
-% Generating a random adjacency matrix
-S = full(sprandsym(n, 0.5));
+% Generating a random adjacency matrix representing a connected graph
+S = full(sprandsym(n, 0.25));
 S = S - diag(diag(S));
-
 A = logical(S);
+
+isolated = find(~any(A));
 
 %% Finding the most accessible town using the Gould index
 
