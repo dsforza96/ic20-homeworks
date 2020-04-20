@@ -45,7 +45,7 @@ subplot(1, 2, 1)
 errorbar(sizes, errors(1, :), minerrs(1, :), maxerrs(1, :));
 axis square
 
-title 'Error on dominant eigenvalue'
+title 'Error on the dominant eigenvalue'
 xlabel 'Dimension (# rows)'
 ylabel 'Error (|\lambda_{MATLAB} - \lambda|)'
 
@@ -53,6 +53,6 @@ subplot(1, 2, 2)
 errorbar(sizes, errors(2, :), minerrs(2, :), maxerrs(2, :));
 axis square
 
-title 'Error on second largest eigenvalue'
+title 'Error on the second largest eigenvalue'
 xlabel 'Dimension (# rows)'
 ylabel 'Error (|\lambda_{MATLAB} - \lambda|'
