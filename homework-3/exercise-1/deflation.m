@@ -1,9 +1,9 @@
 function [x2, lambda2] = deflation(A, x1, lambda1, eps, inverse)
 % Returns the second largest eigenvalue lambda2 and the corrisponding
 % eigenvector x2 exploiting deflation and then applying the power method.
-% If the option 'inverse' is given, computes the second smallest eigenvalue
+% If the option 'inverse' is set, computes the second smallest eigenvalue
 % and the corrisponding eigenvector instead, using deflation and inverse
-% iteration. Converges when |lambda_k - lambda_(k-1)| < eps.
+% iteration. Converges when |lambda2_k - lambda2_(k-1)| < eps.
 
 if nargin < 5
   inverse = false;

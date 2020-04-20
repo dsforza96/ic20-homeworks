@@ -69,7 +69,7 @@ plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
 title 'Most accessible town'
 
 partitions = {posneg_split, mean_split, median_split};
-titles = {'Pos-neg', 'Mean', 'Median'};
+titles = {'Positive-negative', 'Mean value', 'Median value'};
 
 for i=1:3
     subplot(2, 2, i + 1);

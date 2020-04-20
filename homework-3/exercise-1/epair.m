@@ -1,7 +1,7 @@
 function [x, lambda] = epair(A, eps, inverse)
 % Returns the dominant eigenvalue lambda1 and the corrisponding
 % eigenvector x1 obtained via the power method. If the option 'inverse' is
-% given, computes the smallest eigenvalue and the corrisponding
+% set, computes the smallest eigenvalue and the corrisponding
 % eigenvector instead, using inverse iteration. Converges when
 % |lambda_k - lambda_(k-1)| < eps.
 
