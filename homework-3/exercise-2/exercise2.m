@@ -11,7 +11,7 @@ n = 10;
 eps = 1e-6;
 
 % Generating a random adjacency matrix
-S = full(sprandsym(n, 0.25));
+S = full(sprandsym(n, 0.5));
 S = S - diag(diag(S));
 
 A = logical(S);
@@ -28,7 +28,7 @@ x1 = epair(B, eps);
 
 L = diag(sum(A)) - A;
 
-x1 = ones(n, 1);  % Eigenvector associated to lambda1 = 0
+x1 = ones(n, 1);  % Eigenvector (a multiple) associated to lambda1 = 0
 x2 = deflation(L, x1, 0, eps, 'inverse');
 
 posneg_split = x2 < 0;
@@ -39,6 +39,7 @@ median_split = x2 < median(x2);
 
 G = graph(A);
 
+% Colormap to initialize the color of all nodes to blue
 blue = zeros(n, 3);
 blue(:, 3) = 1;
 
@@ -63,30 +64,3 @@ for i=1:3
     plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
     title(titles(i))
 end
-
-% subplot(2, 2, 1);
-% cmap = blue;
-% cmap(maxgould, :) = [1 0 0];
-% plot(G, 'NodeColor', cmap, 'MarkerSize', 10);
-% title Gould
-% 
-% subplot(2, 2, 2);
-% cmap = blue;
-% cmap(posneg_split, 1) = 1;
-% cmap(posneg_split, 3) = 0;
-% plot(G, 'NodeColor', cmap, 'MarkerSize', 10);
-% title Pos-neg
-% 
-% subplot(2, 2, 3);
-% cmap = blue;
-% cmap(mean_split, 1) = 1;
-% cmap(mean_split, 3) = 0;
-% plot(G, 'NodeColor', cmap, 'MarkerSize', 10);
-% title Mean
-% 
-% subplot(2, 2, 4);
-% cmap = blue;
-% cmap(median_split, 1) = 1;
-% cmap(median_split, 3) = 0;
-% plot(G, 'NodeColor', cmap, 'MarkerSize', 10);
-% title Median

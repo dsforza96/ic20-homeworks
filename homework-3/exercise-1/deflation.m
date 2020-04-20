@@ -1,4 +1,10 @@
 function [x2, lambda2] = deflation(A, x1, lambda1, eps, inverse)
+% Returns the second largest eigenvalue lambda2 and the corrisponding
+% eigenvector x2 exploiting deflation and then applying the power method.
+% If the option 'inverse' is given, computes the second smallest eigenvalue
+% and the corrisponding eigenvector instead, using deflation and inverse
+% iteration. Converges when |lambda_k - lambda_(k-1)| < eps.
+
 if nargin < 5
   inverse = false;
 end
@@ -13,15 +19,5 @@ b = A_similar(1, 2:end);
 
 gamma = b * y2 ./ (lambda2 - lambda1);
 x2 = H * [gamma; y2];
-
-
-
-% Householder
-% alpha = -sign(u1(1)) .* norm(u1);
-% e1 = zeros(n, 1);
-% e1(1) = 1;
-% 
-% v = u1 - alpha .* e1;
-% H = eye(n) - 2 .* (v * v') ./ (v' * v);
 
 end
