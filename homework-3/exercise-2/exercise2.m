@@ -28,7 +28,7 @@ x1 = epair(B, eps);
 
 L = diag(sum(A)) - A;
 
-x1 = ones(n, 1);
+x1 = ones(n, 1);  % Eigenvector associated to lambda1 = 0
 x2 = deflation(L, x1, 0, eps, 'inverse');
 
 posneg_split = x2 < 0;
