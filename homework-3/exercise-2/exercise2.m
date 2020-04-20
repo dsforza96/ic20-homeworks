@@ -11,22 +11,26 @@ n = 10;
 eps = 1e-6;
 
 % Generating a random adjacency matrix
-S = full(sprandsym(n, 0.2));
+S = full(sprandsym(n, 0.25));
 S = S - diag(diag(S));
 
 A = logical(S);
 
 % Making the graph connected
-isolated = find(~any(A));
+[components, sizes] = conncomp(graph(A));
 
-for v=isolated
-    connected = find(any(A));
-    w = connected(randi(length(connected)));
+while max(components) > 1
+    a = find(components == 1);
+    b = find(components == 2);
+
+    v = a(randi(sizes(1)));
+    w = b(randi(sizes(2)));
 
     A(v, w) = 1;
-end
+    A(w, v) = 1;
 
-A = A | A';
+    [components, sizes] = conncomp(graph(A));
+end
 
 %% Finding the most accessible town using the Gould index
 
