@@ -10,12 +10,23 @@ end
 n = 10;
 eps = 1e-6;
 
-% Generating a random adjacency matrix representing a connected graph
-S = full(sprandsym(n, 0.25));
+% Generating a random adjacency matrix
+S = full(sprandsym(n, 0.2));
 S = S - diag(diag(S));
+
 A = logical(S);
 
+% Making the graph connected
 isolated = find(~any(A));
+
+for v=isolated
+    connected = find(any(A));
+    w = connected(randi(length(connected)));
+
+    A(v, w) = 1;
+end
+
+A = A | A';
 
 %% Finding the most accessible town using the Gould index
 
@@ -32,9 +43,9 @@ L = diag(sum(A)) - A;
 x1 = ones(n, 1);  % Eigenvector (a multiple) associated to lambda1 = 0
 x2 = deflation(L, x1, 0, eps, 'inverse');
 
-posneg_split = x2 < 0;
-mean_split = x2 < mean(x2);
-median_split = x2 < median(x2);
+posneg_split = find(x2 < 0);
+mean_split = find(x2 < mean(x2));
+median_split = find(x2 < median(x2));
 
 %% Showing results
 
@@ -44,24 +55,25 @@ G = graph(A);
 blue = zeros(n, 3);
 blue(:, 3) = 1;
 
+figure
 subplot(2, 2, 1);
 
 cmap = blue;
 cmap(maxgould, :) = [1 0 0];
 
 plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
-title Gould
+title 'Most accessible town'
 
-partitions = [posneg_split, mean_split, median_split];
+partitions = {posneg_split, mean_split, median_split};
 titles = {'Pos-neg', 'Mean', 'Median'};
 
 for i=1:3
     subplot(2, 2, i + 1);
 
     cmap = blue;
-    cmap(partitions(:, i), 1) = 1;
-    cmap(partitions(:, i), 3) = 0;
+    cmap(partitions{i}, 1) = 1;
+    cmap(partitions{i}, 3) = 0;
 
     plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
-    title(titles(i))
+    title([titles(i), ' bi-partitioning'])
 end
