@@ -10,12 +10,13 @@ end
 n = 10;
 eps = 1e-6;
 
-S = full(sprandsym(n, 0.2));
+% Generating a random adjacency matrix
+S = full(sprandsym(n, 0.25));
 S = S - diag(diag(S));
 
 A = logical(S);
 
-%%
+%% Finding the most accessible town using the Gould index
 
 B = A + eye(n);
 
@@ -23,13 +24,12 @@ x1 = epair(B, eps);
 
 [~, maxgould] = max(x1);
 
-%%
+%% Partitioning the graph according to the Fiedler eigenvector
 
 L = diag(sum(A)) - A;
 
-L_inv = inv(L);
-x1 = epair(L_inv, eps);
-x2 = deflation(L_inv, x1, 0, eps);
+x1 = epair(L, eps, 'inverse');
+x2 = deflation(L, x1, 0, eps, 'inverse');
 
 posneg_split = x2 < 0;
 mean_split = x2 < mean(x2);
@@ -42,11 +42,19 @@ G = graph(A);
 blue = zeros(n, 3);
 blue(:, 3) = 1;
 
-partitions = [(1:n)' == maxgould, posneg_split, mean_split, median_split];
-titles = {'Gould', 'Pos-neg', 'Mean', 'Median'};
+subplot(2, 2, 1);
 
-for i=1:4
-    subplot(2, 2, i);
+cmap = blue;
+cmap(maxgould, :) = [1 0 0];
+
+plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
+title Gould
+
+partitions = [posneg_split, mean_split, median_split];
+titles = {'Pos-neg', 'Mean', 'Median'};
+
+for i=1:3
+    subplot(2, 2, i + 1);
 
     cmap = blue;
     cmap(partitions(:, i), 1) = 1;
