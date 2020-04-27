@@ -2,11 +2,6 @@ clear all
 close all
 clc
 
-% Importing functions from the previous exercise
-if ~exist('exercise-1', 'dir')
-    addpath('../exercise-1')
-end
-
 n = 10;
 eps = 1e-6;
 
@@ -19,7 +14,7 @@ A = logical(S);
 % Making the graph connected
 [components, sizes] = conncomp(graph(A));
 
-while max(components) > 1
+while length(sizes) > 1
     a = find(components == 1);
     b = find(components == 2);
 
@@ -79,5 +74,5 @@ for i=1:3
     cmap(partitions{i}, 3) = 0;
 
     plot(G, 'NodeColor', cmap, 'MarkerSize', 7);
-    title([titles(i), ' bi-partitioning'])
+    title([titles(i) ' bi-partitioning'])
 end
