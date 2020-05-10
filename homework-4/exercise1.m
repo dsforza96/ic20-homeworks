@@ -12,7 +12,7 @@ X2 = randi(M - 1);
 [~, x1] = binary2RNS(X1, n);
 [~, x2] = binary2RNS(X2, n);
 
-nbits = [n, n + 1, n + 1];
+nbits = [n, n, n + 1];
 m = [2 .^ n - 1, 2 .^ n, 2 .^ n + 1];
 S = zeros(1, 3);
 

@@ -32,7 +32,7 @@ for i=1:length(N)
     A_speedups(1, i) = A_rca / A_array;
 
     % Addition in RNS using ripple-carry adders
-    nbits = [n, n + 1, n + 1];
+    nbits = [n, n, n + 1];
 
     T_rns = k * max(nbits) * T_fa;
     A_rns = sum(nbits) * A_fa;
@@ -94,7 +94,7 @@ for i=1:length(K)
     A_speedups(1, i) = A_rca / A_array;
 
     % Addition in RNS using ripple-carry adders
-    nbits = [n, n + 1, n + 1];
+    nbits = [n, n, n + 1];
 
     T_rns = k * max(nbits) * T_fa;
     A_rns = sum(nbits) * A_fa;
