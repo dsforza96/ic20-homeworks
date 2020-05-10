@@ -17,6 +17,8 @@ L = zeros(2, n);
 U(:, 1:size(A, 2)) = A;
 L(:, 1:size(B, 2)) = B;
 
+printRBOperands(U, L);
+
 for k=1:2
     Un = zeros(1, n);
     Ur = U(1, :);
@@ -34,8 +36,29 @@ for k=1:2
 
     U = [Un; Ur];
     L = [Ln(1:n); Lr];
+
+    printRBOperands(U, L);
 end
 
 S = L;
+
+end
+
+
+function printRBOperands(U, L)
+
+n = size(U, 2);
+
+for i=n:-1:1
+    fprintf('%d%d ', U(2, i), U(1, i));
+end
+
+fprintf('\n');
+
+for i=n:-1:1
+    fprintf('%d%d ', L(2, i), L(1, i));
+end
+
+fprintf(['\n' repelem('-', n * 3) '\n']);
 
 end
