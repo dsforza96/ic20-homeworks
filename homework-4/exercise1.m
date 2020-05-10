@@ -19,5 +19,6 @@ for i=1:3
     B = radix102RB(x2(i));
 
     s = RBSum(A, B);
+
     S(i) = mod(RB2radix10(s), 2 .^ n - 2 + i);
 end
