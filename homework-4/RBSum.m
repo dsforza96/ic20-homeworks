@@ -37,7 +37,7 @@ for k=1:2
     U = [Un; Ur];
     L = [Ln(1:n); Lr];
 
-    printRBOperands(U, L);
+    printRBOperands(U, L, k < 2);
 end
 
 S = L;
@@ -45,7 +45,11 @@ S = L;
 end
 
 
-function printRBOperands(U, L)
+function printRBOperands(U, L, println)
+
+if nargin < 3
+    println = true;
+end
 
 n = size(U, 2);
 
@@ -59,6 +63,10 @@ for i=n:-1:1
     fprintf('%d%d ', L(2, i), L(1, i));
 end
 
-fprintf(['\n' repelem('-', n * 3) '\n']);
+fprintf('\n');
+
+if println
+    fprintf([repelem('-', n * 3 - 1) '\n']);
+end
 
 end

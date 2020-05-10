@@ -4,13 +4,13 @@ clc
 
 n = 4;
 
-M = binary2RNS(0, n);
+M = binary2RNS(n);
 
 X1 = randi(M - 1);
 X2 = randi(M - 1);
 
-[~, x1] = binary2RNS(X1, n);
-[~, x2] = binary2RNS(X2, n);
+x1 = binary2RNS(X1, n);
+x2 = binary2RNS(X2, n);
 
 S = zeros(1, 3);
 
