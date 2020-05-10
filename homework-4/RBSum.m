@@ -1,36 +1,41 @@
 function S = RBSum(A, B)
 
-N_table = [0 0 1 1
-           1 1 0 0
-           1 1 0 0
-           0 0 1 1];
-       
-R_table = [0 0 0 0
-           0 0 1 1
-           0 0 1 1
-           1 1 1 1];
+Tn = [0 0 1 1
+      1 1 0 0
+      1 1 0 0
+      0 0 1 1];
 
-n = max(length(A), length(B));
+Tr = [0 0 0 0
+      0 0 1 1
+      0 0 1 1
+      1 1 1 1];
+
+n = max(size(A, 2), size(B, 2));
+U = zeros(2, n);
+L = zeros(2, n);
+
+U(:, 1:size(A, 2)) = A;
+L(:, 1:size(B, 2)) = B;
 
 for k=1:2
-    UN = zeros(1, n);
-    UR = A(1, :);
+    Un = zeros(1, n);
+    Ur = U(1, :);
 
-    LN = zeros(1, n + 1);
-    LR = zeros(1, n);
+    Ln = zeros(1, n + 1);
+    Lr = zeros(1, n);
 
     for i=1:n
-        a = bi2de(A(:, i)') + 1;
-        b = bi2de(B(:, i)') + 1;
+        u = bi2de(U(:, i)') + 1;
+        l = bi2de(L(:, i)') + 1;
 
-        LR(i) = N_table(b, a);
-        LN(i + 1) = R_table(b, a);
+        Lr(i) = Tn(l, u);
+        Ln(i + 1) = Tr(l, u);
     end
 
-    A = [UN; UR];
-    B = [LN(1:n); LR];
+    U = [Un; Ur];
+    L = [Ln(1:n); Lr];
 end
 
-S = B;
+S = L;
 
 end
