@@ -2,21 +2,21 @@ clear all
 close all
 clc
 
-T_ha = 2;  % time(HA) = 2 * T_gate
-A_ha = 3;  % area(HA) = 3 * A_gate
-T_fa = 4;  % time(FA) = 4 * T_gate
-A_fa = 7;  % area(FA) = 7 * A_gate
+T_ha = 2;  % time of HA = 2 * T_gate
+A_ha = 3;  % area of HA = 3 * A_gate
+T_fa = 4;  % time of FA = 4 * T_gate
+A_fa = 7;  % area of FA = 7 * A_gate
 
-%%
+%% Speedups varying the exponent of RNS moduli
 
-N = [3, 4, 5, 6, 7];
-k = 1000;
+exps = [3, 4, 5, 6, 7, 8];
+k = 1000;  % Number of operations
 
-T_speedups = zeros(3, length(N));
-A_speedups = zeros(3, length(N));
+T_speedups = zeros(3, length(exps));
+A_speedups = zeros(3, length(exps));
 
-for i=1:length(N)
-    n = N(i);
+for i=1:length(exps)
+    n = exps(i);
  
     M = (2 .^ n - 1) * (2 .^ n) * (2 .^ n + 1);
 
@@ -50,9 +50,10 @@ for i=1:length(N)
     A_speedups(3, i) = A_rca / A_rns_rb;
 end
 
+% Showing results
 figure
 subplot(1, 2, 1)
-plot(N, T_speedups)
+plot(exps, T_speedups)
 axis square
 
 title 'Time speedup'
@@ -61,7 +62,7 @@ ylabel 'Speedup'
 legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS exploiting the RB table')
 
 subplot(1, 2, 2)
-plot(N, A_speedups)
+plot(exps, A_speedups)
 axis square
 
 title 'Area speedup'
@@ -69,18 +70,18 @@ xlabel 'Exponent of RNS moduli'
 ylabel 'Speedup'
 legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS exploiting the RB table')
 
-%%
+%% Speedups varying the number of operations
 
-n = 6;
-K = [100, 500, 1000, 1500, 2000];
+n = 4;  % Exponent of RNS moduli
+nops = [50, 100, 500, 1000, 1500, 2000];
 
-T_speedups = zeros(3, length(K));
-A_speedups = zeros(3, length(K));
+T_speedups = zeros(3, length(nops));
+A_speedups = zeros(3, length(nops));
 
 M = (2 .^ n - 1) * (2 .^ n) * (2 .^ n + 1);
 
-for i=1:length(K)
-    k = K(i);
+for i=1:length(nops)
+    k = nops(i);
 
     % Standard addition using a ripple-carry adder
     nbits = floor(log2(M - 1)) + 1;
@@ -112,9 +113,10 @@ for i=1:length(K)
     A_speedups(3, i) = A_rca / A_rns_rb;
 end
 
+% Showing results
 figure
 subplot(1, 2, 1)
-plot(K, T_speedups)
+plot(nops, T_speedups)
 axis square
 
 title 'Time speedup'
@@ -123,7 +125,7 @@ ylabel 'Speedup'
 legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS with RB representation')
 
 subplot(1, 2, 2)
-plot(K, A_speedups)
+plot(nops, A_speedups)
 axis square
 
 title 'Area speedup'
