@@ -1,4 +1,4 @@
-% clear all
+clear all
 close all
 clc
 
@@ -7,8 +7,10 @@ A_ha = 3;  % area(HA) = 3 * A_gate
 T_fa = 4;  % time(FA) = 4 * T_gate
 A_fa = 7;  % area(FA) = 7 * A_gate
 
+%%
+
 N = [3, 4, 5, 6, 7];
-k = 100;
+k = 1000;
 
 T_speedups = zeros(3, length(N));
 A_speedups = zeros(3, length(N));
@@ -54,18 +56,18 @@ plot(N, T_speedups)
 axis square
 
 title 'Time speedup'
-xlabel 'n'
+xlabel 'Exponent of RNS moduli'
 ylabel 'Speedup'
-legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS applying the RB table')
+legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS exploiting the RB table')
 
 subplot(1, 2, 2)
 plot(N, A_speedups)
 axis square
 
 title 'Area speedup'
-xlabel 'n'
+xlabel 'Exponent of RNS moduli'
 ylabel 'Speedup'
-legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS applying the RB table')
+legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS exploiting the RB table')
 
 %%
 
@@ -116,15 +118,15 @@ plot(K, T_speedups)
 axis square
 
 title 'Time speedup'
-xlabel 'k'
+xlabel 'Number of operations'
 ylabel 'Speedup'
-legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS applying the RB table')
+legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS with RB representation')
 
 subplot(1, 2, 2)
 plot(K, A_speedups)
 axis square
 
 title 'Area speedup'
-xlabel 'k'
+xlabel 'Number of operations'
 ylabel 'Speedup'
-legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS applying the RB table')
+legend('Pipelined array adder', 'RNS with ripple-carry adders', 'RNS with RB representation')
