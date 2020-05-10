@@ -1,7 +1,7 @@
-function NR = radix102RB(D)
+function NR = radix102RB(D, n)
 
-N = de2bi(D);
-R = zeros(1, length(N));
+N = de2bi(D, n);
+R = zeros(1, n);
 
 NR = [N; R];
 

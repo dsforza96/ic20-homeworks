@@ -64,7 +64,7 @@ for i=n:-1:1
 end
 
 fprintf('\n');
-
+    
 if println
     fprintf([repelem('-', n * 3 - 1) '\n']);
 end
