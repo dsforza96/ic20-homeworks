@@ -22,7 +22,7 @@ for i=1:length(N)
     nbits = floor(log2(M - 1)) + 1;
 
     T_rca = k * nbits * T_fa;
-    A_rca = nbits * T_fa;
+    A_rca = nbits * A_fa;
 
     % Pipelined addition using an array adder
     T_array = (nbits + k - 1) * T_ha;
@@ -84,7 +84,7 @@ for i=1:length(K)
     nbits = floor(log2(M - 1)) + 1;
 
     T_rca = k * nbits * T_fa;
-    A_rca = nbits * T_fa;
+    A_rca = nbits * A_fa;
 
     % Pipelined addition using an array adder
     T_array = (nbits + k - 1) * T_ha;

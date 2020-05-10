@@ -5,9 +5,9 @@ clc
 n = 4;
 
 M = (2 .^ n - 1) .* (2 .^ n) .* (2 .^ n + 1);
-
-X1 = randi(M - 1);
-X2 = randi(M - 1);
+S = randi(M - 1);
+X1 = randi(S);
+X2 = S - X1;
 
 [~, x1] = binary2RNS(X1, n);
 [~, x2] = binary2RNS(X2, n);
