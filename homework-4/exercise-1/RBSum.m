@@ -10,37 +10,36 @@ Tr = [0 0 0 0
       0 0 1 1
       1 1 1 1];
 
-n = max(size(A, 2), size(B, 2));
-U = zeros(2, n);
-L = zeros(2, n);
+n = size(A, 2);
 
-U(:, 1:size(A, 2)) = A;
-L(:, 1:size(B, 2)) = B;
-
-printRBOperands(U, L);
+printRBOperands(A, B);
 
 for k=1:2
     Un = zeros(1, n);
-    Ur = U(1, :);
+    Ur = A(1, :);
 
     Ln = zeros(1, n + 1);
     Lr = zeros(1, n);
 
     for i=1:n
-        u = bi2de(U(:, i)') + 1;
-        l = bi2de(L(:, i)') + 1;
+        a = bi2de(A(:, i)') + 1;
+        b = bi2de(B(:, i)') + 1;
 
-        Lr(i) = Tn(l, u);
-        Ln(i + 1) = Tr(l, u);
+        Lr(i) = Tn(b, a);
+        Ln(i + 1) = Tr(b, a);
     end
 
-    U = [Un; Ur];
-    L = [Ln(1:n); Lr];
+    if Ln(n + 1) == 1
+        error("Overflow: value must not exceed " + (2 .^ n - 1))
+    end
 
-    printRBOperands(U, L, k < 2);
+    A = [Un; Ur];
+    B = [Ln(1:n); Lr];
+
+    printRBOperands(A, B, k < 2);
 end
 
-S = L;
+S = B;
 
 end
 
@@ -53,20 +52,22 @@ end
 
 n = size(U, 2);
 
+fprintf('  ');
+
 for i=n:-1:1
     fprintf('%d%d ', U(2, i), U(1, i));
 end
 
-fprintf('\n');
+fprintf('\n  ');
 
 for i=n:-1:1
     fprintf('%d%d ', L(2, i), L(1, i));
 end
 
 fprintf('\n');
-    
+
 if println
-    fprintf([repelem('-', n * 3 - 1) '\n']);
+    fprintf(['  ' repelem('-', n * 3 - 1) '\n']);
 end
 
 end
