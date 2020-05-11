@@ -1,4 +1,5 @@
-function X = RB2radix10(NR)
+function X = RBToRadix10(NR)
+% Converts the input RB number NR to radix10.
 
 X = sum(bi2de(NR));
 

@@ -1,10 +1,13 @@
 function S = RBSum(A, B)
+% Computes the sum of the input RB numbers applying twice the RB table.
 
+% RB table for normal bits of the lower row
 Tn = [0 0 1 1
       1 1 0 0
       1 1 0 0
       0 0 1 1];
 
+% RB table for redundat bits of the lower row
 Tr = [0 0 0 0
       0 0 1 1
       0 0 1 1
@@ -29,6 +32,7 @@ for k=1:2
         Ln(i + 1) = Tr(b, a);
     end
 
+    % Checking for an eventual overflow
     if Ln(n + 1) == 1
         error("Overflow: value must not exceed " + (2 .^ n - 1))
     end
@@ -45,6 +49,9 @@ end
 
 
 function printRBOperands(U, L, println)
+% Prints the given upper and lower row of an RB addition. If the option
+% println in set to true, a line (---) is printed after the operands
+% to separate them from the result.
 
 if nargin < 3
     println = true;
