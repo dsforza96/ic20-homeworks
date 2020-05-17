@@ -22,41 +22,41 @@ for i=1:n - 1
     A = A + cross + cross';
 end
 
-[x, y] = meshgrid(1:n, 1:sizeofstage);
-
 figure
-p = plot(graph(A));
+G = plot(graph(A));
 axis ij
 
-p.XData = x(:);
-p.YData = y(:);
+[x, y] = meshgrid(1:n, 1:sizeofstage);
 
-p.EdgeColor = 'k';
-p.LineWidth = 1;
+G.XData = x(:);
+G.YData = y(:);
 
-p.Marker = 's';
-p.MarkerSize = 20;
+G.EdgeColor = 'k';
+G.LineWidth = 1;
 
-G = p;
+G.Marker = 's';
+G.MarkerSize = 20;
 
-A = sparse(1:sizeofstage * 2, sizeofstage + 1:sizeofstage * 3, ...
-           1, sizeofstage * 3, sizeofstage * 3);
+G.NodeLabel = {};
 
-A = A + A';
-
-hold on
-p = plot(graph(A));
-
-p.XData = [ones(sizeofstage, 1) .* 0.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 0.5];
-p.YData = repmat((1:sizeofstage)', 3, 1);
-p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
-p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
-
-p = plot(graph(A));
-
-p.XData = n - 1 + [ones(sizeofstage, 1) .* 1.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 1.5];
-p.YData = repmat((1:sizeofstage)', 3, 1);
-p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
-p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
+% A = sparse(1:sizeofstage * 2, sizeofstage + 1:sizeofstage * 3, ...
+%            1, sizeofstage * 3, sizeofstage * 3);
+% 
+% A = A + A';
+% 
+% hold on
+% p = plot(graph(A));
+% 
+% p.XData = [ones(sizeofstage, 1) .* 0.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 0.5];
+% p.YData = repmat((1:sizeofstage)', 3, 1);
+% p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
+% p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
+% 
+% p = plot(graph(A));
+% 
+% p.XData = n - 1 + [ones(sizeofstage, 1) .* 1.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 1.5];
+% p.YData = repmat((1:sizeofstage)', 3, 1);
+% p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
+% p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
 
 end
