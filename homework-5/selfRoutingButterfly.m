@@ -1,14 +1,18 @@
-function [P, S] = selfRoutingButterfly(p)
+function [P, S, confstage] = selfRoutingButterfly(p)
 
 N = length(p);
 n = log2(N);
+
+route = de2bi(p - 1, 'left-msb');
+
+labels = de2bi(0:N / 2 - 1, 'left-msb');
 
 P = zeros(N, 2 .* n);
 P(:, 1) = 1:N;
 
 S = ones(N ./ 2, n) .* 2;
-route = de2bi(p - 1, 'left-msb');
-nodes = de2bi(0:N ./ 2 - 1, 'left-msb');  %#ok<BDSCA>
+
+confstage = inf;
 
 for i=1:n
     perm = P(:, i .* 2 - 1);
@@ -23,6 +27,8 @@ for i=1:n
     
     if any(conflict)
         S(conflict, i) = 3;
+        confstage = i;
+        
         break
     end
     
@@ -31,11 +37,11 @@ for i=1:n
     perm([cross - 1; cross]) = perm([cross; cross - 1]);
     P(:, i .* 2) = perm;
     
-    if i < n 
-        source = [find(nodes(:, i)) .* 2 - 1; find(~nodes(:, i)) .* 2];
-        dest = [find(~nodes(:, i)) .* 2; find(nodes(:, i)) .* 2 - 1];
+    if i < n
+        lones = find(labels(:, i)) .* 2 - 1;
+        lzeros = find(~labels(:, i)) .* 2;
 
-        perm(source) = perm(dest);
+        perm([lones; lzeros]) = perm([lzeros; lones]);
         P(:, i .* 2 + 1) = perm;
     end
 end
