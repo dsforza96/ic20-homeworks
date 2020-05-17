@@ -35,7 +35,7 @@ G.EdgeColor = 'k';
 G.LineWidth = 1;
 
 G.Marker = 's';
-G.MarkerSize = 20;
+G.MarkerSize = 18;
 
 G.NodeLabel = {};
 

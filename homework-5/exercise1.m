@@ -2,13 +2,19 @@ clear all
 close all
 clc
 
-p = [8 1 2 6 4 5 3 7];
-% p = randperm(8);
+n = 4;
+
+p = randperm(2 .^ n);
+
+% Example permutation taken from the lecture given on 11 May 2020
+% n = 3;
+% p = [8 1 2 6 4 5 3 7];
+
+G = drawButterfly(n);
 
 [P, S, confstage] = selfRoutingButterfly(p);
 
-G = drawButterfly(3);
-
+% Highlighting switches configuration
 highlight(G, find(S == 0), 'NodeColor', 'b');
 highlight(G, find(S == 1), 'NodeColor', 'g');
 highlight(G, find(S == 2), 'NodeColor', [0.5 0.5 0.5]);
