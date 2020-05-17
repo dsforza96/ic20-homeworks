@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-n = 4;
+n = 3;
 
 p = randperm(2 .^ n);
 
@@ -10,9 +10,15 @@ p = randperm(2 .^ n);
 % n = 3;
 % p = [8 1 2 6 4 5 3 7];
 
-G = drawButterfly(n);
-
 [P, S, confstage] = selfRoutingButterfly(p);
+
+if isfinite(confstage)
+    fprintf("One or more conflicts occurred while traversing stage #%d\n", confstage)
+end
+
+Permutations = P
+
+G = drawButterfly(n);
 
 % Highlighting switches configuration
 highlight(G, find(S == 0), 'NodeColor', 'b');
