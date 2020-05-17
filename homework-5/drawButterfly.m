@@ -1,4 +1,4 @@
-function drawButterfly(n, S)
+function G = drawButterfly(n)
 
 N = 2 .^ n;
 
@@ -36,6 +36,8 @@ p.LineWidth = 1;
 
 p.Marker = 's';
 p.MarkerSize = 20;
+
+G = p;
 
 A = sparse(1:sizeofstage * 2, sizeofstage + 1:sizeofstage * 3, ...
            1, sizeofstage * 3, sizeofstage * 3);
