@@ -1,6 +1,6 @@
 function G = drawButterfly(n)
 
-N = 2 .^ n;
+N = 2 ^ n;
 
 sizeofstage = N / 2;
 nswitch = n * sizeofstage;
@@ -39,24 +39,17 @@ G.MarkerSize = 18;
 
 G.NodeLabel = {};
 
-% A = sparse(1:sizeofstage * 2, sizeofstage + 1:sizeofstage * 3, ...
-%            1, sizeofstage * 3, sizeofstage * 3);
-% 
-% A = A + A';
-% 
-% hold on
-% p = plot(graph(A));
-% 
-% p.XData = [ones(sizeofstage, 1) .* 0.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 0.5];
-% p.YData = repmat((1:sizeofstage)', 3, 1);
-% p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
-% p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
-% 
-% p = plot(graph(A));
-% 
-% p.XData = n - 1 + [ones(sizeofstage, 1) .* 1.5; ones(sizeofstage, 1); ones(sizeofstage, 1) .* 1.5];
-% p.YData = repmat((1:sizeofstage)', 3, 1);
-% p.YData(1:sizeofstage) = p.YData(1:sizeofstage) - 0.1;
-% p.YData(sizeofstage * 2 + 1:end) = p.YData(sizeofstage * 2 + 1:end) + 0.1;
+% Printing input and output labels
+labels = string(dec2bin(0:N - 1));
+labels = join(reshape(labels, [2, sizeofstage])', newline);
+
+x = ones(sizeofstage, 1) - 0.05 .* n;
+y = 1:sizeofstage;
+
+text(x, y, labels);
+
+x = ones(sizeofstage, 1) .* n + 0.1;
+
+text(x, y, labels);
 
 end

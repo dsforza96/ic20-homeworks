@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-n = 3;
+n = 4;
 
 p = randperm(2 .^ n);
 
