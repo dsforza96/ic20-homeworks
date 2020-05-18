@@ -10,13 +10,16 @@ p = randperm(2 .^ n);
 % n = 3;
 % p = [8 1 2 6 4 5 3 7];
 
+% p = [4 9 2 10 11 7 15 8 14 5 13 6 16 1 12 3]; working
+% p = [7 13 2 12 15 4 9 3 10 1 14 5 11 8 16 6]; conflict stage 3
+
 [P, S, confstage] = selfRoutingButterfly(p);
 
 if isfinite(confstage)
     fprintf("One or more conflicts occurred while traversing stage #%d\n", confstage)
 end
 
-Permutations = P
+Permutations = P  % Printing P
 
 G = drawButterfly(n);
 
