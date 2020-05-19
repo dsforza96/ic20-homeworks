@@ -1,4 +1,6 @@
 function G = drawButterfly(n)
+% Draws the butterfly network of size 2 ^ n. Returns the GraphPlot object
+% related to the plotted network.
 
 N = 2 ^ n;
 

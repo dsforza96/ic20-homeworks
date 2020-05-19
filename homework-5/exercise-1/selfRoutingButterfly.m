@@ -1,4 +1,13 @@
 function [P, S, confstage] = selfRoutingButterfly(p)
+% Computes the routing on the butterfly network of size length(p) induced
+% by the input permutation using the self-routing algorithm.
+% Returns:
+% - the matrix P where columns represent permutations befor and after 
+%   traversing each stage;
+% - the matrix S representig the switch setting once apllied the algorithm
+%   (0 -> straight, 1 -> cross, 2 -> not traversed, 3 -> conflict);
+% - if one or more conflicts occurred, the number confstage of the first
+%   stage where they occurred, NaN otherwise.
 
 N = length(p);
 n = log2(N);
