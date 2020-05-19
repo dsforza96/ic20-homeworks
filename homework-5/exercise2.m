@@ -14,7 +14,7 @@ fprintf("  First stage:   %d modules of size %d x %d\n", r, n, m)
 fprintf("  Second stage:  %d modules of size %d x %d\n", m, r, r)
 fprintf("  Third stage:   %d modules of size %d x %d\n", r, m, n)
 
-C_sn = (2 * r .* ceil(m / n) + m * ceil(r / n)) * n ^ 2; 
+C_sn = (2 * r * ceil(m / n) + m * ceil(r / n)) * n ^ 2; 
 
 % Rearrangeable CLOS network
 m = n;
